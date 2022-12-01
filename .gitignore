@@ -1,0 +1,14 @@
+#MacOS pain
+*.DS_Store
+
+#IDE things
+.vscode/
+.idea/
+
+# Build output
+*.d
+*.o
+*.bin
+*.map
+*.out
+*.hex
