@@ -31,8 +31,8 @@ all: $(OBJECT_FILES)
 # Clean project - Delete all build output
 .PHONY: clean
 clean:
-	rm $(OBJECT_FILES) $(DEPENDENCY_FILES)
-
+	rm -r build/*
+	#rm $(OBJECT_FILES) $(DEPENDENCY_FILES)
 -include $(DEPENDENCY_FILES)
 
 # Compile source files into object files

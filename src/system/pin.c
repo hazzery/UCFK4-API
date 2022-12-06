@@ -1,5 +1,8 @@
-#include "pin.h"
-
+#include "system/pin.h"
+#ifndef __AVR_ATmega32U2__
+#define __AVR_ATmega32U2__
+#endif
+#include <avr/io.h>
 /**
  * @brief Sets the given port as in output
  * 
