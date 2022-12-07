@@ -24,6 +24,7 @@ typedef enum port_e {
 
 typedef enum pin_mode_e {
     OUTPUT,
+    OUTPUT_ACTIVE_LOW,
     INPUT,
     INPUT_PULLUP,
     ERROR
@@ -31,7 +32,7 @@ typedef enum pin_mode_e {
 
 typedef struct pin_s
 {
-    register_t registr;
+    register_t port_register;
     uint8_t port_bit;
     pin_mode_t mode;
 } pin_t;

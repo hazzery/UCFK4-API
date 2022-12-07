@@ -69,10 +69,10 @@ static register_t set_input_pin(const port_t port, const uint8_t port_bit)
  */
 pin_t define_pin(const port_t port, const uint8_t port_bit, const pin_mode_t mode)
 {
-    // Checks to see if bit number is valid
+    // Checks to see if the bit number is valid
     if (port_bit > 7) {
         return (pin_t) {
-            .registr = NULL, .port_bit = 255, .mode = ERROR
+            .port_register = NULL, .port_bit = 255, .mode = ERROR
         };
     }
 
@@ -87,6 +87,6 @@ pin_t define_pin(const port_t port, const uint8_t port_bit, const pin_mode_t mod
 
     // Returns new pin_t object
     return (pin_t) {
-        .registr = port_register, .port_bit = port_bit, .mode = mode
+        .port_register = port_register, .port_bit = port_bit, .mode = mode
     };
 }
