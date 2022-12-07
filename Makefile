@@ -14,11 +14,8 @@ MMCU 				:= atmega32u2
 CFLAGS 				:= -mmcu=$(MMCU) -Os -Wall -Wstrict-prototypes -Wextra -g $(DEPFLAGS) $(foreach Directory,$(INCLUDE_DIRECTORIES),-I$(Directory))
 
 #---------------------------------------------------------------------------------
-#MAKE RULES - SHOULDN'T NEED TO CHANGE ANYTHING BELOW HERE
+# MAKE RULES
 #---------------------------------------------------------------------------------
-
-BINARY 				:= $(PROJECT_NAME).out
-HEX			 		:= $(patsubst %.out,%.hex,$(BINARY))
 
 SRC_FILES 			:= $(foreach Directory,$(SRC_DIRECTORIES),$(wildcard $(Directory)/*.$(SRC_EXTENSION)))
 OBJECT_FILES		:= $(addprefix build/,$(notdir $(SRC_FILES:.$(SRC_EXTENSION)=.o)))
