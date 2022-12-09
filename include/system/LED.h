@@ -3,7 +3,10 @@
 
 #include "digitalIO.h"
 
-typedef struct LED_t LED_t;
+typedef struct LED_s {
+    pin_t pin;
+    state_t state;
+} LED_t;
 
 /**
  * @brief Constructs a new `LED_t` object

@@ -4,7 +4,11 @@
 #include "digitalIO.h"
 #include <stdbool.h>
 
-typedef struct button_t button_t;
+typedef struct button_s {
+    pin_t pin;
+    state_t state;
+    state_t prev_state;
+} button_t;
 
 /**
  * @brief Constructs a new `button_t` object

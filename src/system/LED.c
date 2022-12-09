@@ -1,10 +1,5 @@
 #include "system/LED.h"
 
-struct LED_t {
-    pin_t pin;
-    state_t state;
-};
-
 /**
  * @brief Constructs a new `LED_t` object
  * @param port a `port_t` enum value describing the port in which the LED is connected to

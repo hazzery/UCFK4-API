@@ -1,11 +1,5 @@
 #include "system/button.h"
 
-struct button_t {
-    pin_t pin;
-    state_t state;
-    state_t prev_state;
-};
-
 /**
  * @brief Constructs a new `button_t` object
  * @param port a `port_t` enum value describing the port in which the button is connected to
