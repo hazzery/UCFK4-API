@@ -8,31 +8,51 @@ SRC_DIRECTORIES		:= src/system src/drivers src/utilities
 INCLUDE_DIRECTORIES := ./include
 
 CC 					:= avr-gcc
-OPTIMIZATION_FLAGs	:= -00
+OPTIMIZATION_FLAGS	:= -00
 DEPENDENCY_FLAGS 	:= -MMD
 MMCU 				:= atmega32u2
-CFLAGS 				:= -mmcu=$(MMCU) -Os -Wall -Wstrict-prototypes -Wextra -g $(DEPFLAGS) $(foreach Directory,$(INCLUDE_DIRECTORIES),-I$(Directory))
+CFLAGS 				:= -mmcu=$(MMCU) -Os -Wall -Wstrict-prototypes -Wextra -g $(DEPENDENCY_FLAGS) $(foreach directory,$(INCLUDE_DIRECTORIES),-I$(directory))
 
 #---------------------------------------------------------------------------------
 # MAKE RULES
 #---------------------------------------------------------------------------------
 
-SRC_FILES 			:= $(foreach Directory,$(SRC_DIRECTORIES),$(wildcard $(Directory)/*.$(SRC_EXTENSION)))
-OBJECT_FILES		:= $(addprefix build/,$(notdir $(SRC_FILES:.$(SRC_EXTENSION)=.o)))
-DEPENDENCY_FILES	:= $(patsubst %.$(SRC_EXTENSION),%.d,$(SRC_FILES))
+API_SRC_FILES 		:= $(foreach directory,$(SRC_DIRECTORIES),$(wildcard $(directory)/*.$(SRC_EXTENSION)))
+API_OBJECT_FILES	:= $(addprefix build/,$(notdir $(API_SRC_FILES:.$(SRC_EXTENSION)=.o)))
+API_DEP_FILES		:= $(addprefix build/,$(notdir $(API_SRC_FILES:.$(SRC_EXTENSION)=.d)))
+
+TEST_SRC_FILES		:= $(wildcard test/extra-depth-lmao/*.$(SRC_EXTENSION))
+TEST_OBJECT_FILES	:= $(addprefix build/,$(notdir $(TEST_SRC_FILES:.$(SRC_EXTENSION)=.o)))
+TEST_DEP_FILES		:= $(addprefix build/,$(notdir $(TEST_SRC_FILES:.$(SRC_EXTENSION)=.d)))
+TEST_BINARIES		:= $(addprefix build/bin/,$(notdir $(TEST_SRC_FILES:.$(SRC_EXTENSION)=.out)))
 
 
-# Default target - Build binary file
-all: $(OBJECT_FILES)
+# Default target - Build all unit test binary files
+all: $(TEST_BINARIES)
+
+# Make specified unit test - Simply specify unit test in command line arguments
+$(MAKECMDGOALS): $(findstring build/bin/$(MAKECMDGOALS).out, $(TEST_BINARIES))
+
+
+# Print out value of specified variables
+print:
+	@echo $(API_DEP_FILES)
+	@echo $(TEST_DEP_FILES)
 
 # Clean project - Delete all build output
-.PHONY: clean
 clean:
 	rm -r build/*
-	#rm $(OBJECT_FILES) $(DEPENDENCY_FILES)
--include $(DEPENDENCY_FILES)
+
+-include $(API_DEP_FILES) $(TEST_DEP_FILES)
+
+build/bin/%.out: build/%.o $(API_OBJECT_FILES)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $^ -o $@
 
 # Compile source files into object files
-build/%.o: src/*/%.c
+build/%.o: */*/%.c
 	@mkdir -p $(@D)
 	$(CC) -c $(CFLAGS) $< -o $@
+
+
+.PHONY: clean print $(MAKECMDGOALS)
