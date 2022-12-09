@@ -31,6 +31,6 @@ void LED_set_state(LED_t* LED, state_t state)
  */
 void LED_toggle_state(LED_t* LED)
 {
-    digital_write(&LED->pin, !(LED->state));
     LED->state = !(LED->state);
+    digital_write(&LED->pin, LED->state);
 }
