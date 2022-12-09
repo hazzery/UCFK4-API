@@ -29,6 +29,7 @@ state_t button_update_state(button_t* button)
 {
     button->prev_state = button->state;
     button->state = digital_read(&button->pin);
+    return button->state;
 }
 
 /**
