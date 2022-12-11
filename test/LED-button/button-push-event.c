@@ -4,9 +4,14 @@
 
 #include "system/LED.h"
 #include "system/button.h"
+#include "system/clock.h"
+#include "system/watch_dog.h"
 
 int main(void)
 {
+    clock_initialize();
+    watch_dog_init();
+
     button_t pushy = button_construct(PORT_D, 7, INPUT);
     LED_t bluey = LED_construct(PORT_C, 2, OUTPUT);
 
