@@ -7,7 +7,7 @@
  * @param mode either `OUTPUT` or `OUTPUT_ACTIVE_LOW` depending on the type of button
  * @return `LED_t` object to control LED with
  */
-LED_t LED_construct(port_t port, uint8_t port_bit, pin_mode_t mode)
+LED_t LED_construct(const port_t port, const uint8_t port_bit, const pin_mode_t mode)
 {
     return (LED_t) {
         .pin = define_pin(port, port_bit, mode)
@@ -19,7 +19,7 @@ LED_t LED_construct(port_t port, uint8_t port_bit, pin_mode_t mode)
  * @param LED Pointer to the `LED_t` to set the state of
  * @param state The state to set the LED to
  */
-void LED_set_state(LED_t* LED, state_t state)
+void LED_set_state(LED_t* const LED, const state_t state)
 {
     digital_write(&LED->pin, state);
     LED->state = state;
@@ -29,7 +29,7 @@ void LED_set_state(LED_t* LED, state_t state)
  * @brief Toggle the state of an LED
  * @param LED Pointer to the `LED_t` to toggle
  */
-void LED_toggle_state(LED_t* LED)
+void LED_toggle_state(LED_t* const LED)
 {
     LED->state = !(LED->state);
     digital_write(&LED->pin, LED->state);

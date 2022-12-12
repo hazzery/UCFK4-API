@@ -7,7 +7,7 @@
  * @param mode either `INPUT` or `INPUT_PULLUP` depending on the type of button
  * @return `button_t` object to control the button with
  */
-button_t button_construct(port_t port, uint8_t port_bit, pin_mode_t mode)
+inline button_t button_construct(const port_t port, const uint8_t port_bit, const pin_mode_t mode)
 {
     return (button_t) {
         .pin = define_pin(port, port_bit, mode)
@@ -19,7 +19,7 @@ button_t button_construct(port_t port, uint8_t port_bit, pin_mode_t mode)
  * @param button Pointer to the `button_t` to update
  * @return the current state of the button
  */
-state_t button_update_state(button_t* button)
+state_t button_update_state(button_t* const button)
 {
     button->prev_state = button->state;
     button->state = digital_read(&button->pin);
@@ -31,7 +31,7 @@ state_t button_update_state(button_t* button)
  * @param button Pointer to the `button_t` to read from
  * @return `true` if button is pressed down, `false` otherwise
  */
-bool button_being_pressed(button_t* button)
+bool button_being_pressed(button_t* const button)
 {
     return button->state == HIGH;
 }
@@ -41,7 +41,7 @@ bool button_being_pressed(button_t* button)
  * @param button Pointer to the `button_t` to read from
  * @return `true` if button has just been released, `false` otherwise
  */
-bool button_released_event(button_t* button)
+bool button_released_event(button_t* const button)
 {
     return (button->state != button->prev_state) && button->state == LOW;
 }
@@ -51,7 +51,7 @@ bool button_released_event(button_t* button)
  * @param button Pointer to the `button_t` to read from
  * @return `true` if button has just been pressed, `false` otherwise
  */
-bool button_pushed_event(button_t* button)
+bool button_pushed_event(button_t* const button)
 {
     return (button->state != button->prev_state) && button->state == HIGH;
 }

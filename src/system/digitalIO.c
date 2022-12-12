@@ -5,7 +5,7 @@
  * @param pin `pin_t` describing port to write to
  * @param state The state to set the pin to, either HIGH or LOW
  */
-void digital_write(pin_t* pin, state_t state)
+void digital_write(pin_t* const pin, const state_t state)
 {
     if (pin->mode == OUTPUT) {
         if (state == HIGH) {
@@ -22,7 +22,7 @@ void digital_write(pin_t* pin, state_t state)
  * @param pin Pointer to a `pin_t` describing pin to read from
  * @return The state of the bit when read, either HIGH or LOW
  */
-state_t digital_read(pin_t* pin)
+state_t digital_read(pin_t* const pin)
 {
     if (pin->mode == INPUT || pin->mode == OUTPUT) {
         return (*(pin->port_register) & BIT_MASK(pin->port_bit)) >> pin->port_bit;
