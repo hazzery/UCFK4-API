@@ -1,0 +1,6 @@
+#ifndef MINI_GRAPHICS_LIBRARY_H
+#define MINI_GRAPHICS_LIBRARY_H
+
+//o_o//
+
+#endif //MINI_GRAPHICS_LIBRARY_H

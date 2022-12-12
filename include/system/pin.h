@@ -1,5 +1,5 @@
-#ifndef PIN_H
-#define PIN_H
+#ifndef GENERAL_PURPOSE_PIN_H
+#define GENERAL_PURPOSE_PIN_H
 
 #include <stdint.h>
 
@@ -46,4 +46,4 @@ typedef struct pin_s
  */
 extern pin_t define_pin(port_t port, uint8_t port_bit, pin_mode_t mode);
 
-#endif
+#endif //GENERAL_PURPOSE_PIN_H

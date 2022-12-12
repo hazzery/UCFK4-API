@@ -47,4 +47,4 @@ extern bool button_released_event(button_t* button);
  */
 extern bool button_pushed_event(button_t* button);
 
-#endif // BUTTON_H
+#endif //BUTTON_H

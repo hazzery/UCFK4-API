@@ -23,4 +23,4 @@ extern void digital_write(pin_t* pin, state_t state);
  */
 extern state_t digital_read(pin_t* pin);
 
-#endif
+#endif //DIGITAL_INPUT_OUTPUT_H

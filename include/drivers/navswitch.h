@@ -1,0 +1,6 @@
+#ifndef NAVIGATION_SWITCH_H
+#define NAVIGATION_SWITCH_H
+
+//o_o//
+
+#endif //NAVIGATION_SWITCH_H

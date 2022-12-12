@@ -28,4 +28,4 @@ extern void LED_set_state(LED_t* LED, state_t state);
  */
 extern void LED_toggle_state(LED_t* LED);
 
-#endif // LIGHT_EMITTING_DIODE_H
+#endif //LIGHT_EMITTING_DIODE_H
