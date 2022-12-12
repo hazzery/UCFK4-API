@@ -9,10 +9,10 @@ void digital_write(pin_t* pin, state_t state)
 {
     if (pin->mode == OUTPUT) {
         if (state == HIGH) {
-            *(pin->port_register) |= BIT(pin->port_bit);
+            *(pin->port_register) |= BIT_MASK(pin->port_bit);
 
         } else {
-            *(pin->port_register) &= ~BIT(pin->port_bit);
+            *(pin->port_register) &= ~BIT_MASK(pin->port_bit);
         }
     }
 }
@@ -25,10 +25,10 @@ void digital_write(pin_t* pin, state_t state)
 state_t digital_read(pin_t* pin)
 {
     if (pin->mode == INPUT || pin->mode == OUTPUT) {
-        return (*(pin->port_register) & BIT(pin->port_bit));
+        return (*(pin->port_register) & BIT_MASK(pin->port_bit)) >> pin->port_bit;
 
     } else if (pin->mode == INPUT_PULLUP || pin->mode == OUTPUT_ACTIVE_LOW) {
-        return !(*(pin->port_register) & BIT(pin->port_bit));
+        return !(*(pin->port_register) & BIT_MASK(pin->port_bit));
 
     } else {
         return ERROR_STATE;

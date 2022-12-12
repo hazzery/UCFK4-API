@@ -15,15 +15,15 @@ static register_t set_output_pin(const port_t port, const uint8_t port_bit)
     switch (port)
     {
     case PORT_B:
-        DDRB |= BIT(port_bit);
+        DDRB |= BIT_MASK(port_bit);
         return &PORTB;
         
     case PORT_C:
-        DDRC |= BIT(port_bit);
+        DDRC |= BIT_MASK(port_bit);
         return &PORTC;
         
     case PORT_D:
-        DDRD |= BIT(port_bit);
+        DDRD |= BIT_MASK(port_bit);
         return &PORTD;
     
     default:
@@ -43,15 +43,15 @@ static register_t set_input_pin(const port_t port, const uint8_t port_bit)
     switch (port)
     {
     case PORT_B:
-        DDRB &= ~BIT(port_bit);
+        DDRB &= ~BIT_MASK(port_bit);
         return &PINB;
 
     case PORT_C:
-        DDRC &= ~BIT(port_bit);
+        DDRC &= ~BIT_MASK(port_bit);
         return &PINC;
 
     case PORT_D:
-        DDRD &= ~BIT(port_bit);
+        DDRD &= ~BIT_MASK(port_bit);
         return &PIND;
 
     default:

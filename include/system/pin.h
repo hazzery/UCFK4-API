@@ -11,7 +11,7 @@
  * @param X The bit to be set HIGH
  * @return Integer number representing bit sequence
  */
-#define BIT(X) (1 << (X))
+#define BIT_MASK(X) (1 << (X))
 #define NULL ((void *)0)
 
 typedef volatile uint8_t* register_t;
