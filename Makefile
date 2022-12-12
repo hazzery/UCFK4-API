@@ -35,6 +35,7 @@ all: $(TEST_BINARIES)
 $(MAKECMDGOALS): $(findstring build/bin/$(MAKECMDGOALS).out, $(TEST_BINARIES))
 	avr-objcopy -O ihex $^ $(TEST_HEX_FILE)
 
+# Flash currently selected unit test onto board
 upload: $(TEST_HEX_FILE)
 	dfu-programmer $(MMCU) erase; dfu-programmer $(MMCU) flash $(TEST_HEX_FILE); dfu-programmer $(MMCU) start
 
@@ -49,6 +50,7 @@ clean:
 
 -include $(API_DEP_FILES) $(TEST_DEP_FILES)
 
+# Build unit test binary file from object files
 build/bin/%.out: build/%.o $(API_OBJECT_FILES)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $^ -o $@
