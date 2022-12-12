@@ -37,6 +37,13 @@ typedef struct pin_s
     pin_mode_t mode;
 } pin_t;
 
+/**
+ * @brief Define a new GPIO pin for use
+ * @param port The `port_t` enum value corresponding to the pin's port
+ * @param port_bit the with within the port being used
+ * @param mode a `pin_mode_t` value, generally either `INPUT` or `OUTPUT`
+ * @return The `pin_t` object for use in the digitalIO module
+ */
 extern pin_t define_pin(port_t port, uint8_t port_bit, pin_mode_t mode);
 
 #endif
