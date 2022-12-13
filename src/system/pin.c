@@ -3,6 +3,7 @@
 #define __AVR_ATmega32U2__
 #endif
 #include <avr/io.h>
+
 /**
  * @brief Sets the given port as in output
  * 
@@ -79,7 +80,7 @@ pin_t define_pin(const port_t port, const uint8_t port_bit, const pin_mode_t mod
     register_t port_register;
 
     // Sets pin mode
-    if (mode == OUTPUT) {
+    if (mode == OUTPUT || mode == OUTPUT_ACTIVE_LOW) {
         port_register = set_output_pin(port, port_bit);
     } else {
         port_register = set_input_pin(port, port_bit);
