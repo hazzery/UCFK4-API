@@ -31,9 +31,8 @@ TEST_HEX_FILE		:= build/bin/upload_me.hex
 # Default target - Build all unit test binary files
 all: $(TEST_BINARIES)
 
-# Make specified unit test - Simply specify unit test in command line arguments
-$(MAKECMDGOALS): $(findstring build/bin/$(MAKECMDGOALS).out, $(TEST_BINARIES))
-	avr-objcopy -O ihex $^ $(TEST_HEX_FILE)
+# Make specified unit test - specify unit test in command line arguments
+#$(MAKECMDGOALS): $(findstring build/bin/$(MAKECMDGOALS).out, $(TEST_BINARIES))
 
 # Flash currently selected unit test onto board
 upload: $(TEST_HEX_FILE)
@@ -42,7 +41,7 @@ upload: $(TEST_HEX_FILE)
 
 # Print out value of specified variables
 print:
-	@echo $(TEST_HEX_FILE)
+	@echo $(TEST_BINARIES)
 
 # Clean project - Delete all build output
 clean:
@@ -54,6 +53,7 @@ clean:
 build/bin/%.out: build/%.o $(API_OBJECT_FILES)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $^ -o $@
+	avr-objcopy -O ihex $< $(TEST_HEX_FILE)
 
 # Compile source files into object files
 build/%.o: */*/%.c
@@ -61,4 +61,4 @@ build/%.o: */*/%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
-.PHONY: clean print upload $(MAKECMDGOALS)
+.PHONY: clean print upload
