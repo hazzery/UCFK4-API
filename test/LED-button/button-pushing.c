@@ -19,5 +19,4 @@ int main(void)
             LED_set_state(&bluey, LOW);
         }
     }
-    return 0;
 }
